@@ -8,3 +8,13 @@ class GetMovieDetailsEvent extends MovieDetailsEvent {
 
   GetMovieDetailsEvent(this.id);
 }
+class GetMoreLikeThisEvent extends MovieDetailsEvent {
+  String id;
+
+  GetMoreLikeThisEvent(this.id);
+}
+class ShowMoreEvent extends MovieDetailsEvent{
+  bool isFull;
+
+  ShowMoreEvent(this.isFull);
+}
