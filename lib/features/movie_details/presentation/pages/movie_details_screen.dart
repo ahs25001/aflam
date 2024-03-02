@@ -38,6 +38,7 @@ class MovieDetailsScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          print((state.movieDetailsEntity?.overview ?? "").length);
           return (state.movieDetailsScreenStatus ==
                   MovieDetailsScreenStatus.loading)
               ? const Center(
@@ -74,10 +75,14 @@ class MovieDetailsScreen extends StatelessWidget {
                                       : MediaQuery.of(context).size.height *
                                           1.30)
                                   : MediaQuery.of(context).size.height * 1.40)
-                              : MediaQuery.of(context).size.height * 1.50)
+                              : ((state.movieDetailsEntity?.overview?.length ??
+                                          0) >=
+                                      500)
+                                  ? MediaQuery.of(context).size.height * 2
+                                  : MediaQuery.of(context).size.height * 1.50)
                           : (((state.movieDetailsEntity?.genres?.length ?? 0) <=
                                   3)
-                              ? MediaQuery.of(context).size.height*1.05
+                              ? MediaQuery.of(context).size.height * 1.09
                               : MediaQuery.of(context).size.height * 1.12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

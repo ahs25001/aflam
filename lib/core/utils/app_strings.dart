@@ -4,4 +4,5 @@ class AppStrings {
   static const String showMore = "show more";
   static const String showLess = "show less";
   static const String  moreLikeThis = "More Like This";
+  static const String  browseCategory  = "Browse Category ";
 }

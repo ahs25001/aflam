@@ -1,8 +1,11 @@
 import 'package:aflame/config.dart';
 import 'package:aflame/core/utils/app_colors.dart';
+import 'package:aflame/features/home/domain/use_cases/get_categories_use_case.dart';
 import 'package:aflame/features/home/domain/use_cases/get_new_releases_useCase.dart';
 import 'package:aflame/features/home/domain/use_cases/get_popular_useCase.dart';
 import 'package:aflame/features/home/domain/use_cases/get_recommended_useCase.dart';
+import 'package:aflame/features/home/domain/use_cases/search_use_case.dart';
+import 'package:aflame/features/home/presentation/pages/category_tab.dart';
 import 'package:aflame/features/home/presentation/pages/home_tab.dart';
 import 'package:aflame/features/home/presentation/pages/search_tab.dart';
 import 'package:aflame/features/home/presentation/pages/wishs_tab.dart';
@@ -18,10 +21,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc(getIt<GetPopularUseCase>(),
-          getIt<GetNewReleasesUseCase>(), getIt<GetRecommendedUseCase>())
+      create: (context) => HomeBloc(
+          getIt<GetPopularUseCase>(),
+          getIt<GetNewReleasesUseCase>(),
+          getIt<GetRecommendedUseCase>(),
+          getIt<SearchUseCase>(),
+          getIt<GetCategoriesUseCase>())
         ..add(GetPopularEvent())
-        ..add(GetNewReleasesEvent())..add(GetRecommendedEvent()),
+        ..add(GetNewReleasesEvent())
+        ..add(GetRecommendedEvent())
+        ..add(GetCategoriesEvent()),
       child: SafeArea(
         child: BlocConsumer<HomeBloc, HomeState>(
           listener: (context, state) {
@@ -41,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             List<Widget> tabs = [
               const HomeTab(),
               const SearchTab(),
-              const WishesTab(),
+              const CategoryTab(),
               const WishesTab()
             ];
             return Scaffold(

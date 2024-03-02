@@ -9,6 +9,14 @@ class GetNewReleasesEvent extends HomeEvent {}
 
 class GetRecommendedEvent extends HomeEvent {}
 
+class GetCategoriesEvent extends HomeEvent {}
+
+class SearchEvent extends HomeEvent {
+  String key;
+
+  SearchEvent(this.key);
+}
+
 class ChangeTabEvent extends HomeEvent {
   int newIndex;
 

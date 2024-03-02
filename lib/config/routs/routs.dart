@@ -1,3 +1,4 @@
+import 'package:aflame/features/movi_descover/presentation/pages/movie_dicover_screen.dart';
 import 'package:aflame/features/movie_details/presentation/pages/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ import '../../features/home/presentation/pages/home_scrreen.dart';
 class AppRoutes {
   static const String home = "/";
   static const String movieDetails = "movieDetails";
+  static const String movieDiscover = "movieDiscover";
 }
 
 class Routes {
@@ -19,6 +21,11 @@ class Routes {
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => MovieDetailsScreen(),
+        );
+      case AppRoutes.movieDiscover:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => MovieDiscoverScreen(),
         );
       default:
         return MaterialPageRoute(
