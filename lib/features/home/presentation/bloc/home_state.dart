@@ -5,6 +5,12 @@ enum HomeScreenStatus {
   getPopularLoading,
   getPopularSuccess,
   getPopularError,
+  addToWishLoading,
+  addToWishSuccess,
+  addToWishError,
+  deleteFromWishLoading,
+  deleteFromWishSuccess,
+  deleteFromWishError,
   getCategoriesLoading,
   getCategoriesSuccess,
   getCategoriesError,
@@ -17,6 +23,9 @@ enum HomeScreenStatus {
   getRecommendedLoading,
   getRecommendedSuccess,
   getRecommendedError,
+  getWishListLoading,
+  getWishListSuccess,
+  getWishListError,
 }
 
 @immutable
@@ -29,6 +38,8 @@ class HomeState {
   RecommendedEntity? recommendedEntity;
   SearchResultEntity? searchResultEntity;
   CategoryEntity? categoryEntity;
+  List<WishMovieModel>? wishList;
+  List<num?>? wishListIds;
 
   HomeState(
       {this.homeScreenStatus,
@@ -38,6 +49,8 @@ class HomeState {
       this.searchResultEntity,
       this.recommendedEntity,
       this.popularEntity,
+      this.wishList,
+      this.wishListIds,
       this.currentTab});
 
   HomeState copyWith(
@@ -45,12 +58,16 @@ class HomeState {
       CategoryEntity? categoryEntity,
       SearchResultEntity? searchResultEntity,
       int? currentTab,
+      List<WishMovieModel>? wishList,
       RecommendedEntity? recommendedEntity,
       NewReleasesEntity? newReleasesEntity,
       Failures? failures,
+      List<num?>? wishListIds,
       PopularEntity? popularEntity}) {
     return HomeState(
         failures: failures ?? this.failures,
+        wishList: wishList ?? this.wishList,
+        wishListIds: wishListIds ?? this.wishListIds,
         categoryEntity: categoryEntity ?? this.categoryEntity,
         recommendedEntity: recommendedEntity ?? this.recommendedEntity,
         newReleasesEntity: newReleasesEntity ?? this.newReleasesEntity,

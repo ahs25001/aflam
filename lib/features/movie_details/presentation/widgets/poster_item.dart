@@ -33,7 +33,7 @@ class PosterItem extends StatelessWidget {
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
-        AppComponents.addIcon(),
+        // AppComponents.addIcon(),
       ],
     );
   }

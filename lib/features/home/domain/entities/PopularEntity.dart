@@ -8,7 +8,7 @@ class PopularEntity extends Equatable{
       this.totalResults,});
 
   num? page;
-  List<ResultsEntity>? results;
+  List<PopularDataEntity>? results;
   num? totalPages;
   num? totalResults;
 
@@ -21,8 +21,8 @@ class PopularEntity extends Equatable{
 
 }
 
-class ResultsEntity extends Equatable {
-  ResultsEntity({
+class PopularDataEntity extends Equatable {
+  PopularDataEntity({
       this.adult, 
       this.backdropPath, 
       this.genreIds, 

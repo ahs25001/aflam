@@ -31,7 +31,7 @@ class NewReleasesModel extends NewReleasesEntity {
 class NewReleasesDataModel extends NewReleasesDataEntity {
   NewReleasesDataModel({
     this.adult,
-    this.backdropPath,
+    super.backdropPath,
     this.genreIds,
     super.id,
     this.originalLanguage,
@@ -40,7 +40,7 @@ class NewReleasesDataModel extends NewReleasesDataEntity {
     this.popularity,
     super.posterPath,
     super.releaseDate,
-    this.title,
+    super.title,
     this.video,
     this.voteAverage,
     this.voteCount,
@@ -64,7 +64,7 @@ class NewReleasesDataModel extends NewReleasesDataEntity {
   }
 
   bool? adult;
-  String? backdropPath;
+
   List<int>? genreIds;
 
   String? originalLanguage;

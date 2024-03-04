@@ -1,9 +1,13 @@
 import 'package:aflame/config.dart';
 import 'package:aflame/core/utils/app_colors.dart';
+import 'package:aflame/core/utils/app_strings.dart';
+import 'package:aflame/features/home/domain/use_cases/add_movie_to_wish_use_case.dart';
+import 'package:aflame/features/home/domain/use_cases/delete_from_wish_list_use_case.dart';
 import 'package:aflame/features/home/domain/use_cases/get_categories_use_case.dart';
 import 'package:aflame/features/home/domain/use_cases/get_new_releases_useCase.dart';
 import 'package:aflame/features/home/domain/use_cases/get_popular_useCase.dart';
 import 'package:aflame/features/home/domain/use_cases/get_recommended_useCase.dart';
+import 'package:aflame/features/home/domain/use_cases/get_wish_move_use_case.dart';
 import 'package:aflame/features/home/domain/use_cases/search_use_case.dart';
 import 'package:aflame/features/home/presentation/pages/category_tab.dart';
 import 'package:aflame/features/home/presentation/pages/home_tab.dart';
@@ -26,11 +30,15 @@ class HomeScreen extends StatelessWidget {
           getIt<GetNewReleasesUseCase>(),
           getIt<GetRecommendedUseCase>(),
           getIt<SearchUseCase>(),
-          getIt<GetCategoriesUseCase>())
+          getIt<GetCategoriesUseCase>(),
+          getIt<AddMovieToWishUseCase>(),
+          getIt<GetWishMovieUseCase>(),
+          getIt<DeleteFromWishListUseCase>())
         ..add(GetPopularEvent())
         ..add(GetNewReleasesEvent())
         ..add(GetRecommendedEvent())
-        ..add(GetCategoriesEvent()),
+        ..add(GetCategoriesEvent())
+        ..add(GetWishListEvent()),
       child: SafeArea(
         child: BlocConsumer<HomeBloc, HomeState>(
           listener: (context, state) {
@@ -41,9 +49,24 @@ class HomeScreen extends StatelessWidget {
                     HomeScreenStatus.getRecommendedError) {
               showDialog(
                   context: context,
-                  builder: (context) => AlertDialog(
-                        content: Text(state.failures?.massage ?? "error"),
+                  builder: (context) => PopScope(
+                        canPop: false,
+                        child: AlertDialog(
+                          content: Text(state.failures?.massage ?? "error"),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(AppStrings.cancel))
+                          ],
+                        ),
                       ));
+            } else if (state.homeScreenStatus ==
+                    HomeScreenStatus.addToWishSuccess ||
+                state.homeScreenStatus ==
+                    HomeScreenStatus.deleteFromWishSuccess) {
+              HomeBloc.get(context).add(GetWishListEvent());
             }
           },
           builder: (context, state) {
@@ -51,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               const HomeTab(),
               const SearchTab(),
               const CategoryTab(),
-              const WishesTab()
+              WishesTab()
             ];
             return Scaffold(
               backgroundColor: AppColors.appBackGround,

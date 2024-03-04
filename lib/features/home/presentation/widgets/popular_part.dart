@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../domain/entities/PopularEntity.dart';
 
 class PopularPart extends StatelessWidget {
-  List<ResultsEntity> popularMovies;
+  List<PopularDataEntity> popularMovies;
 
   PopularPart(this.popularMovies);
 

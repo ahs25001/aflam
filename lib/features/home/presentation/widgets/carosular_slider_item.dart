@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CarouselSliderItem extends StatelessWidget {
-  ResultsEntity resultsEntity;
+  PopularDataEntity resultsEntity;
 
   CarouselSliderItem(this.resultsEntity);
 

@@ -5,6 +5,9 @@ enum MovieDiscoverScreenStatus {
   getMovieDiscoverLoading,
   getMovieDiscoverError,
   getMovieDiscoverSuccess,
+  addToWishLoading,
+  addToWishSuccess,
+  addToWishError,
 }
 
 @immutable

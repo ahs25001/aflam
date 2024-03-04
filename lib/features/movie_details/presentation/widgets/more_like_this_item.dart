@@ -50,7 +50,7 @@ MoreLikeThisDataEntity? moreLikeThisDataEntity;
                     ),
                   ),
                 ),
-                AppComponents.addIcon(),
+                // AppComponents.addIcon(),
               ],
             ),
             Padding(

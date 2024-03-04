@@ -11,6 +11,20 @@ class GetRecommendedEvent extends HomeEvent {}
 
 class GetCategoriesEvent extends HomeEvent {}
 
+class AddToWishListEvent extends HomeEvent {
+  WishMovieModel wishMovieModel;
+
+  AddToWishListEvent(this.wishMovieModel);
+}
+
+class GetWishListEvent extends HomeEvent {}
+
+class DeleteFromWishListEvent extends HomeEvent {
+  WishMovieModel wishMovieModel;
+
+  DeleteFromWishListEvent(this.wishMovieModel);
+}
+
 class SearchEvent extends HomeEvent {
   String key;
 

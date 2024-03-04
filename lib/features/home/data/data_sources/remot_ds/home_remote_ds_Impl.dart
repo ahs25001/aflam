@@ -4,7 +4,7 @@ import 'package:aflame/core/api/api_manager.dart';
 import 'package:aflame/core/api/end_points.dart';
 import 'package:aflame/core/api/error.dart';
 import 'package:aflame/core/utils/app_constants.dart';
-import 'package:aflame/features/home/data/data_sources/home_remote_ds.dart';
+import 'package:aflame/features/home/data/data_sources/remot_ds/home_remote_ds.dart';
 import 'package:aflame/features/home/data/models/CategoryModel.dart';
 import 'package:aflame/features/home/data/models/NewReleasesModel.dart';
 import 'package:aflame/features/home/data/models/PopularModel.dart';

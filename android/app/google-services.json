@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "13942731948",
+    "project_id": "aflame-ae3d0",
+    "storage_bucket": "aflame-ae3d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13942731948:android:520170d6fa6bb5c3341b09",
+        "android_client_info": {
+          "package_name": "com.example.aflame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH03tU36dSl5FcYJ1Q3Jg7SUs6DfqvTr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

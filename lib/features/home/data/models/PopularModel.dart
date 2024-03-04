@@ -13,7 +13,7 @@ class PopularModel extends PopularEntity {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(PopularDataModel.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -21,8 +21,8 @@ class PopularModel extends PopularEntity {
   }
 }
 
-class Results extends ResultsEntity {
-  Results({
+class PopularDataModel extends PopularDataEntity {
+  PopularDataModel({
     super.adult,
     super.backdropPath,
     super.genreIds,
@@ -39,7 +39,7 @@ class Results extends ResultsEntity {
     super.voteCount,
   });
 
-  Results.fromJson(dynamic json) {
+  PopularDataModel.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

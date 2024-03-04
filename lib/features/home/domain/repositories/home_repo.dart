@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/error.dart';
+import '../../data/models/WishMovieModel.dart';
 import '../entities/NewReleasesEntity.dart';
 
 @injectable
@@ -17,4 +18,7 @@ abstract class HomeRepo {
   Future<Either<RecommendedEntity?, Failures>> getRecommended();
   Future<Either<CategoryEntity?, Failures>> getCategories();
   Future<Either<SearchResultEntity?, Failures>> search(String key);
+  Future<List<WishMovieModel>> getWishMove();
+  Future<int> addToWishList (WishMovieModel wishMovieModel);
+  Future<int> deleteFromWishList (WishMovieModel wishMovieModel);
 }
