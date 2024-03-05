@@ -18,6 +18,7 @@ class MoreLikeThisDataEntity extends Equatable{
     this.releaseDate,
     this.title,
     this.voteAverage,
+    this.backdropPath
   });
 
   num? id;
@@ -25,7 +26,7 @@ class MoreLikeThisDataEntity extends Equatable{
   String? posterPath;
   String? releaseDate;
   String? title;
-
+  String? backdropPath;
   num? voteAverage;
 
   @override

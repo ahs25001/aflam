@@ -21,7 +21,7 @@ class RecommendedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
-        // TODO: implement listener
+
       },
       builder: (context, state) {
         return Card(
@@ -30,7 +30,7 @@ class RecommendedItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
-                alignment: Alignment(-2.0.w, -1.5.h),
+                alignment:Alignment.topLeft,
                 children: [
                   InkWell(
                     onTap: () => Navigator.pushNamed(

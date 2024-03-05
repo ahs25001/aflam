@@ -28,7 +28,7 @@ class MoreLikeThisModel extends MoreLikeThisEntity {
 class MoreLikeThisDataModel extends MoreLikeThisDataEntity {
   MoreLikeThisDataModel({
     this.adult,
-    this.backdropPath,
+    super.backdropPath,
     this.genreIds,
     super.id,
     super.posterPath,
@@ -61,7 +61,6 @@ class MoreLikeThisDataModel extends MoreLikeThisDataEntity {
   }
 
   bool? adult;
-  String? backdropPath;
   List<num>? genreIds;
 
   String? originalLanguage;

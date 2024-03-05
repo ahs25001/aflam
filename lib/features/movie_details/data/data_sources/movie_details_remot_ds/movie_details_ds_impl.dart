@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
-import '../models/MoviewDetailsModel.dart';
+import '../../models/MoviewDetailsModel.dart';
 import 'movie_details_ds.dart';
 
 @Injectable(as: MovieDetailsDs)

@@ -59,10 +59,10 @@ class CarouselSliderItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ((resultsEntity.title ?? "").length < 14)
-                      ? resultsEntity.title ?? ""
-                      : "${(resultsEntity.title ?? "").substring(0, 14)}....",
-                  style: AppStyles.movieTitleStyle,
+                  ((resultsEntity.title ?? "null").length < 14)
+                      ? resultsEntity.title ?? "null"
+                      : "${(resultsEntity.title ?? "null").substring(0, 14)}....",
+                  style: AppStyles.movieTitleInListStyle.copyWith(fontSize: 17.sp,fontWeight: FontWeight.w400),
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 8.h,),

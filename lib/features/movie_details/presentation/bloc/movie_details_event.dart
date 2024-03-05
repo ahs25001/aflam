@@ -8,12 +8,28 @@ class GetMovieDetailsEvent extends MovieDetailsEvent {
 
   GetMovieDetailsEvent(this.id);
 }
+
+class AddToWishListFromDetailsEvent extends MovieDetailsEvent {
+  WishMovieModel wishMovieModel;
+
+  AddToWishListFromDetailsEvent(this.wishMovieModel);
+}
+
+class GetIdsEvent extends MovieDetailsEvent {}
+
+class DeleteFromWishListFromDetailsEvent extends MovieDetailsEvent {
+  WishMovieModel wishMovieModel;
+
+  DeleteFromWishListFromDetailsEvent(this.wishMovieModel);
+}
+
 class GetMoreLikeThisEvent extends MovieDetailsEvent {
   String id;
 
   GetMoreLikeThisEvent(this.id);
 }
-class ShowMoreEvent extends MovieDetailsEvent{
+
+class ShowMoreEvent extends MovieDetailsEvent {
   bool isFull;
 
   ShowMoreEvent(this.isFull);

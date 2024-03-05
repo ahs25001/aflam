@@ -16,15 +16,15 @@ class AppComponents {
     //       movieDiscoverScreenStatus ==
     //           MovieDiscoverScreenStatus.addToWishSuccess;
     // }
-    return IconButton(
-        onPressed: () {
+    return InkWell(
+        onTap: () {
           if (isWishMovie) {
             deleteMovie();
           } else {
             addMovie();
           }
         },
-        icon: Stack(alignment: Alignment.center, children: [
+        child: Stack(alignment: Alignment.center, children: [
           (homeScreenStatus == HomeScreenStatus.addToWishLoading ||
                   movieDiscoverScreenStatus ==
                       MovieDiscoverScreenStatus.addToWishLoading)

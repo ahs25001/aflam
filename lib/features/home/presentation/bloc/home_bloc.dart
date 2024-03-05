@@ -115,6 +115,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             homeScreenStatus: HomeScreenStatus.getWishListLoading));
         var response = await getWishMovieUseCase();
         List<num?> wishListIds = response.map((e) => e.id).toList();
+        print("success------------------------------------");
         emit(state.copyWith(
             homeScreenStatus: HomeScreenStatus.getWishListSuccess,
             wishListIds: wishListIds,
@@ -125,6 +126,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await deleteFromWishListUseCase(event.wishMovieModel);
         emit(state.copyWith(
             homeScreenStatus: HomeScreenStatus.deleteFromWishSuccess));
+      } else if (event is UpDateWishListEvent) {
+        print("-------------------------------------");
+        emit(state.copyWith(
+            homeScreenStatus: HomeScreenStatus.wishListUpdatedFromDetails));
       }
     });
   }

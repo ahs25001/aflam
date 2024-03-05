@@ -19,6 +19,8 @@ class AddToWishListEvent extends HomeEvent {
 
 class GetWishListEvent extends HomeEvent {}
 
+class UpDateWishListEvent extends HomeEvent {}
+
 class DeleteFromWishListEvent extends HomeEvent {
   WishMovieModel wishMovieModel;
 

@@ -2,6 +2,9 @@ import 'package:aflame/config.dart';
 import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_constants.dart';
 import 'package:aflame/core/utils/app_styles.dart';
+import 'package:aflame/features/movie_details/domain/use_cases/add_to_wish_list_from_details_use_case.dart';
+import 'package:aflame/features/movie_details/domain/use_cases/delete_from_wish_list_from_details_use_case.dart';
+import 'package:aflame/features/movie_details/domain/use_cases/get_%20wish_list_from_details_use_case.dart';
 import 'package:aflame/features/movie_details/domain/use_cases/get_more_like_this_use_case.dart';
 import 'package:aflame/features/movie_details/domain/use_cases/get_movie_details_use_case.dart';
 import 'package:aflame/features/movie_details/presentation/widgets/more_like_this_part.dart';
@@ -23,7 +26,11 @@ class MovieDetailsScreen extends StatelessWidget {
     var args = ModalRoute.of(context)?.settings.arguments as int;
     return BlocProvider(
       create: (context) => MovieDetailsBloc(
-          getIt<GetMovieDetailsUseCase>(), getIt<GetMoreLikeThisUseCase>())
+          getIt<GetMovieDetailsUseCase>(),
+          getIt<GetMoreLikeThisUseCase>(),
+          getIt<AddToWishListFromDetailsUseCase>(),
+          getIt<DeleteFromWishListFromDetailsUseCse>(),
+          getIt<GetWishListFromDetailsUseCase>())
         ..add(GetMovieDetailsEvent(args.toString() ))
         ..add(GetMoreLikeThisEvent(args.toString())),
       child: BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
@@ -35,6 +42,11 @@ class MovieDetailsScreen extends StatelessWidget {
                 builder: (context) => AlertDialog(
                       content: Text(state.failures?.massage ?? "error"),
                     ));
+          } else if (state.movieDetailsScreenStatus ==
+              MovieDetailsScreenStatus.getMoreLikeThisSuccess||state.movieDetailsScreenStatus ==
+              MovieDetailsScreenStatus.addToWishSuccess||state.movieDetailsScreenStatus ==
+          MovieDetailsScreenStatus.deleteFromWishSuccess) {
+            MovieDetailsBloc.get(context).add(GetIdsEvent());
           }
         },
         builder: (context, state) {

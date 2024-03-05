@@ -2,8 +2,8 @@ import 'package:aflame/core/api/error.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/MoreLikeThisModel.dart';
-import '../models/MoviewDetailsModel.dart';
+import '../../models/MoreLikeThisModel.dart';
+import '../../models/MoviewDetailsModel.dart';
 
 @injectable
 abstract class MovieDetailsDs{

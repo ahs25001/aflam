@@ -1,4 +1,8 @@
 import 'package:aflame/features/home/domain/entities/NewReleasesEntity.dart';
+import 'package:aflame/features/movi_descover/domain/entities/MoveDiscoverEntity.dart';
+import 'package:aflame/features/movie_details/data/models/MoreLikeThisModel.dart';
+import 'package:aflame/features/movie_details/domain/entities/MoreLikeThisEntity.dart';
+import 'package:aflame/features/movie_details/domain/entities/MovieDetailsEntity.dart';
 
 import '../../domain/entities/PopularEntity.dart';
 import '../../domain/entities/RecommendedEntity.dart';
@@ -38,6 +42,18 @@ class WishMovieModel {
             date: popularDataModel.releaseDate,
             id: popularDataModel.id,
             title: popularDataModel.title);
+  WishMovieModel.fromMoreLikeThis(MoreLikeThisDataEntity moreLikeThisDataEntity)
+      : this(
+            image: moreLikeThisDataEntity.backdropPath,
+            date: moreLikeThisDataEntity.releaseDate,
+            id: moreLikeThisDataEntity.id,
+            title: moreLikeThisDataEntity.title);
+  WishMovieModel.fromMovieDetails(MovieDetailsEntity movieDetailsEntity)
+      : this(
+            image: movieDetailsEntity.backdropPath,
+            date: movieDetailsEntity.releaseDate,
+            id: movieDetailsEntity.id,
+            title: movieDetailsEntity.title);
 
   Map<String, dynamic> toJson() {
     return {"id": id, "title": title, "image": image, "date": date};

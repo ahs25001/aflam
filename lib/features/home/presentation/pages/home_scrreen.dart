@@ -20,8 +20,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -67,6 +65,9 @@ class HomeScreen extends StatelessWidget {
                 state.homeScreenStatus ==
                     HomeScreenStatus.deleteFromWishSuccess) {
               HomeBloc.get(context).add(GetWishListEvent());
+            } else if (state.homeScreenStatus ==
+                HomeScreenStatus.wishListUpdatedFromDetails) {
+              HomeBloc.get(context).add(GetWishListEvent());
             }
           },
           builder: (context, state) {
@@ -83,8 +84,15 @@ class HomeScreen extends StatelessWidget {
                 backgroundColor: AppColors.primary,
                 buttonBackgroundColor: AppColors.barColor,
                 color: AppColors.barColor,
-                onTap: (value) =>
-                    HomeBloc.get(context).add(ChangeTabEvent(value)),
+                onTap: (value) {
+                  if (value == 3) {
+                    HomeBloc.get(context)
+                      ..add(ChangeTabEvent(value))
+                      ..add(GetWishListEvent());
+                  } else {
+                    HomeBloc.get(context).add(ChangeTabEvent(value));
+                  }
+                },
                 items: [
                   const Icon(
                     Icons.home,
@@ -97,7 +105,16 @@ class HomeScreen extends StatelessWidget {
                           (state.currentTab == 3) ? Colors.red : Colors.white)
                 ],
               ),
-              body: tabs[state.currentTab ?? 0],
+              body: RefreshIndicator(
+                  onRefresh: () async {
+                    HomeBloc.get(context)
+                      ..add(GetPopularEvent())
+                      ..add(GetNewReleasesEvent())
+                      ..add(GetRecommendedEvent())
+                      ..add(GetCategoriesEvent())
+                      ..add(GetWishListEvent());
+                  },
+                  child: tabs[state.currentTab ?? 0]),
             );
           },
         ),

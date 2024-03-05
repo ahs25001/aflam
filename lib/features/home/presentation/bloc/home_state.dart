@@ -26,6 +26,7 @@ enum HomeScreenStatus {
   getWishListLoading,
   getWishListSuccess,
   getWishListError,
+  wishListUpdatedFromDetails
 }
 
 @immutable

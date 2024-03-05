@@ -24,6 +24,7 @@ class NewReleasesItem extends StatelessWidget {
         id: resultsEntity?.id,
         posterPath: resultsEntity?.posterPath,
         title: resultsEntity?.title,
+        backdropPath: resultsEntity?.backdropPath,
         releaseDate: resultsEntity?.releaseDate);
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
@@ -31,10 +32,11 @@ class NewReleasesItem extends StatelessWidget {
       },
       builder: (context, state) {
         return Stack(
-          alignment: Alignment(-2.0.w, -1.5.h),
+          alignment: Alignment.topLeft,
           children: [
             InkWell(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.movieDetails,
+              onTap: () => Navigator.pushNamed(
+                  context, AppRoutes.movieDetails,
                   arguments: newReleasesDataEntity?.id),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(18.r),
@@ -56,11 +58,13 @@ class NewReleasesItem extends StatelessWidget {
             AppComponents.addIcon(
                 addMovie: () => HomeBloc.get(context).add(AddToWishListEvent(
                     WishMovieModel.fromRelease(newReleasesDataEntity!))),
-                deleteMovie: ()=>HomeBloc.get(context).add(DeleteFromWishListEvent(
-                    WishMovieModel.fromRelease(newReleasesDataEntity!))) ,
+                deleteMovie: () => HomeBloc.get(context).add(
+                    DeleteFromWishListEvent(
+                        WishMovieModel.fromRelease(newReleasesDataEntity!))),
                 isWishMovie:
                     state.wishListIds?.contains(newReleasesDataEntity?.id) ??
-                        false,homeScreenStatus: state.homeScreenStatus),
+                        false,
+                homeScreenStatus: state.homeScreenStatus),
           ],
         );
       },
