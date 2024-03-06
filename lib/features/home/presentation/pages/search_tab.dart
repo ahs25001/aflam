@@ -1,4 +1,3 @@
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_jsons.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/presentation/widgets/search_result_item.dart';
@@ -28,13 +27,15 @@ class SearchTab extends StatelessWidget {
                   textInputAction: TextInputAction.search,
                   onFieldSubmitted: (value) =>
                       HomeBloc.get(context).add(SearchEvent(value)),
-                  style: AppStyles.movieTitleInListStyle,
+                  style: AppStyles.movieTitleInListStyle.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      ),
                   controller: HomeBloc.get(context).searchController,
-                  cursorColor: AppColors.primary,
+                  cursorColor: Theme.of(context).colorScheme.primary,
                   decoration: InputDecoration(
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       filled: true,
                       fillColor: Colors.grey.withOpacity(.25),
@@ -71,7 +72,7 @@ class SearchTab extends StatelessWidget {
                         : Expanded(
                             child: ListView.separated(
                               separatorBuilder: (context, index) => Divider(
-                                color: Colors.white38,
+                                color: Theme.of(context).colorScheme.background,
                                 endIndent: 10.w,
                                 indent: 10.w,
                               ),

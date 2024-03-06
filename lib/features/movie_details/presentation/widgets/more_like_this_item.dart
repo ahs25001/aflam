@@ -19,13 +19,12 @@ MoreLikeThisItem(this.moreLikeThisDataEntity, {super.key});
 
   @override
 Widget build(BuildContext context) {
-  print("${moreLikeThisDataEntity?.id}+++++++++++++++++++++++++++++++++++");
     return BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
       listener: (context, state) {
       },
       builder: (context, state) {
         return Card(
-          color: AppColors.cardColor,
+          color: Theme.of(context).colorScheme.surface,
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: 200.h),
             child: Column(
@@ -47,17 +46,20 @@ Widget build(BuildContext context) {
                           fit: BoxFit.fill,
                           width: 129.w,
                           height: 199.h,
-                          placeholder: (context, url) => const Center(
+                          placeholder: (context, url) => Center(
                             child: CircularProgressIndicator(
-                              color: AppColors.primary,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                       ),
                     ),
                     AppComponents.addIcon(
+                        selectedColor: Theme.of(context).colorScheme.primary,
                         addMovie: () {
                           MovieDetailsBloc.get(context).add(
                               AddToWishListFromDetailsEvent(
@@ -93,7 +95,8 @@ Widget build(BuildContext context) {
                           Text(
                             (moreLikeThisDataEntity?.voteAverage ?? 0)
                                 .toString(),
-                            style: AppStyles.movieTitleInListStyle,
+                            style: AppStyles.movieTitleInListStyle.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface),
                           )
                         ],
                       ),
@@ -101,11 +104,13 @@ Widget build(BuildContext context) {
                         ((moreLikeThisDataEntity?.title?.length ?? 0) < 12)
                             ? moreLikeThisDataEntity?.title ?? ""
                             : "${(moreLikeThisDataEntity?.title ?? "").substring(0, 12)}...",
-                        style: AppStyles.movieTitleInListStyle,
+                        style: AppStyles.movieTitleInListStyle.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface),
                       ),
                       Text(
                         moreLikeThisDataEntity?.releaseDate ?? "",
-                        style: AppStyles.dateStyle,
+                        style: AppStyles.dateStyle.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface),
                       )
                     ],
                   ),

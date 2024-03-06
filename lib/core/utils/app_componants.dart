@@ -9,13 +9,9 @@ class AppComponents {
       {required void Function() addMovie,
       required void Function() deleteMovie,
       required bool isWishMovie,
+      Color? selectedColor,
       HomeScreenStatus? homeScreenStatus,
       MovieDiscoverScreenStatus? movieDiscoverScreenStatus}) {
-    // if (!isWishMovie) {
-    //   isWishMovie = homeScreenStatus == HomeScreenStatus.addToWishSuccess ||
-    //       movieDiscoverScreenStatus ==
-    //           MovieDiscoverScreenStatus.addToWishSuccess;
-    // }
     return InkWell(
         onTap: () {
           if (isWishMovie) {
@@ -28,15 +24,15 @@ class AppComponents {
           (homeScreenStatus == HomeScreenStatus.addToWishLoading ||
                   movieDiscoverScreenStatus ==
                       MovieDiscoverScreenStatus.addToWishLoading)
-              ? const Center(
+              ? Center(
                   child: CircularProgressIndicator(
-                  color: AppColors.primary,
+                  color: selectedColor ?? AppColors.primary,
                 ))
               : Icon(
                   Icons.bookmark,
                   size: 56.sp,
                   color: (isWishMovie)
-                      ? AppColors.primary
+                      ?selectedColor ?? AppColors.primary
                       : AppColors.barColor.withOpacity(.7),
                 ),
           Icon(

@@ -1,4 +1,3 @@
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_strings.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/domain/entities/NewReleasesEntity.dart';
@@ -17,17 +16,17 @@ class NewReleasesPart extends StatelessWidget {
       flex: 4,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        color: AppColors.barColor,
+        color: Theme.of(context).colorScheme.onPrimary,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               AppStrings.newReleases,
-              style: AppStyles.movieTitleStyle,
+              style:  AppStyles.movieDetailsTitleStyle.copyWith(
+                  fontSize: 20.sp,
+                  color: Theme.of(context).colorScheme.onSurface),
             ),
-
             Expanded(
-
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Padding(

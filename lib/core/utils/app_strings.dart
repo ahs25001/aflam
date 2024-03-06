@@ -7,4 +7,5 @@ class AppStrings {
   static const String  browseCategory  = "Browse Category ";
   static const String  watchlist  = "Watchlist";
   static const String  cancel  = "cancel";
+  static const String  appTitle  = "Aflam";
 }

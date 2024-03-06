@@ -1,4 +1,3 @@
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_constants.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/domain/entities/PopularEntity.dart';
@@ -19,22 +18,35 @@ class CarouselSliderItem extends StatelessWidget {
         Column(
           children: [
             CachedNetworkImage(
-              imageUrl:
-                  AppConstants.imageBaseUrl + (resultsEntity.backdropPath ?? ""),
+              imageUrl: AppConstants.imageBaseUrl +
+                  (resultsEntity.backdropPath ?? ""),
               fit: BoxFit.fill,
               width: 412.w,
               height: 217.h,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholder: (context, url) =>
+                  Center(
+                    child: CircularProgressIndicator(
+                      color: Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
+                    ),
+                  ),
+              errorWidget: (context, url, error) =>
+                  Icon(
+                    Icons.error,
+                    color: Theme
+                        .of(context)
+                        .colorScheme
+                        .primary,
+                  ),
             ),
             Expanded(
               child: Container(
-                color: AppColors.barColor,
-              ),
+                  color: Theme
+                      .of(context)
+                      .colorScheme
+                      .onPrimary),
             )
           ],
         ),
@@ -61,8 +73,12 @@ class CarouselSliderItem extends StatelessWidget {
                 Text(
                   ((resultsEntity.title ?? "null").length < 14)
                       ? resultsEntity.title ?? "null"
-                      : "${(resultsEntity.title ?? "null").substring(0, 14)}....",
-                  style: AppStyles.movieTitleInListStyle.copyWith(fontSize: 17.sp,fontWeight: FontWeight.w400),
+                      : "${(resultsEntity.title ?? "null").substring(
+                      0, 14)}....",
+                  style: AppStyles.movieDetailsTitleStyle.copyWith(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.onSurface),
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 8.h,),

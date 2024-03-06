@@ -1,4 +1,3 @@
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_strings.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/presentation/widgets/category_item.dart';
@@ -19,9 +18,9 @@ class CategoryTab extends StatelessWidget {
       },
       builder: (context, state) {
         return (state.homeScreenStatus == HomeScreenStatus.getCategoriesLoading)
-            ? const Center(
+            ? Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               )
             : Padding(
@@ -31,7 +30,10 @@ class CategoryTab extends StatelessWidget {
                   children: [
                     Text(
                       AppStrings.browseCategory,
-                      style: AppStyles.movieDetailsTitleStyle,
+                      style: AppStyles.movieDetailsTitleStyle.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 20.h,

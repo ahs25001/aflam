@@ -46,9 +46,9 @@ class NewReleasesItem extends StatelessWidget {
                   fit: BoxFit.fill,
                   width: 129.w,
                   height: 199.h,
-                  placeholder: (context, url) => const Center(
+                  placeholder: (context, url) =>  Center(
                     child: CircularProgressIndicator(
-                      color: AppColors.primary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -56,6 +56,7 @@ class NewReleasesItem extends StatelessWidget {
               ),
             ),
             AppComponents.addIcon(
+                selectedColor: Theme.of(context).colorScheme.primary,
                 addMovie: () => HomeBloc.get(context).add(AddToWishListEvent(
                     WishMovieModel.fromRelease(newReleasesDataEntity!))),
                 deleteMovie: () => HomeBloc.get(context).add(

@@ -50,196 +50,230 @@ class MovieDetailsScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          print((state.movieDetailsEntity?.overview ?? "").length);
-          return (state.movieDetailsScreenStatus ==
-                  MovieDetailsScreenStatus.loading)
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ))
-              : Scaffold(
-                  backgroundColor: AppColors.appBackGround,
-                  appBar: AppBar(
-                    iconTheme: const IconThemeData(color: Colors.white),
-                    backgroundColor: AppColors.appBackGround,
+          return Scaffold(
+              appBar: AppBar(
                 title: Text(
                   state.movieDetailsEntity?.title ?? "",
-                  style: AppStyles.movieDetailsTitleStyle,
+                  style: AppStyles.movieDetailsTitleStyle.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold),
                 ),
-                centerTitle: true,
               ),
-              body: SingleChildScrollView(
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 500),
-                      height: (state.isFull ?? false)
-                          ? (((state.movieDetailsEntity?.overview?.length ??
-                                      0) <=
-                                  340)
-                              ? (((state.movieDetailsEntity?.overview?.length ??
-                                          0) <=
-                                      240)
-                                  ? (((state.movieDetailsEntity?.overview
-                                                  ?.length ??
-                                              0) <=
-                                          140)
-                                      ? MediaQuery.of(context).size.height *
-                                          1.20
-                                      : MediaQuery.of(context).size.height *
-                                          1.30)
-                                  : MediaQuery.of(context).size.height * 1.40)
-                              : ((state.movieDetailsEntity?.overview?.length ??
-                                          0) >=
-                                      500)
-                                  ? MediaQuery.of(context).size.height * 2
-                                  : MediaQuery.of(context).size.height * 1.50)
-                          : (((state.movieDetailsEntity?.genres?.length ?? 0) <=
-                                  3)
-                              ? MediaQuery.of(context).size.height * 1.09
-                              : MediaQuery.of(context).size.height * 1.12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CachedNetworkImage(
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primary,
+              body: (state.movieDetailsScreenStatus ==
+                      MovieDetailsScreenStatus.loading)
+                  ? Center(
+                      child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
+                    ))
+                  : SingleChildScrollView(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        height: (state.isFull ?? false)
+                            ? (((state.movieDetailsEntity?.overview?.length ??
+                                        0) <=
+                                    340)
+                                ? (((state.movieDetailsEntity?.overview
+                                                ?.length ??
+                                            0) <=
+                                        240)
+                                    ? (((state.movieDetailsEntity?.overview
+                                                    ?.length ??
+                                                0) <=
+                                            140)
+                                        ? MediaQuery.of(context).size.height *
+                                            1.20
+                                        : MediaQuery.of(context).size.height *
+                                            1.30)
+                                    : MediaQuery.of(context).size.height * 1.40)
+                                : ((state.movieDetailsEntity?.overview
+                                                ?.length ??
+                                            0) >=
+                                        500)
+                                    ? MediaQuery.of(context).size.height * 2
+                                    : MediaQuery.of(context).size.height * 1.50)
+                            : (((state.movieDetailsEntity?.genres?.length ??
+                                        0) <=
+                                    3)
+                                ? MediaQuery.of(context).size.height * 1.09
+                                : MediaQuery.of(context).size.height * 1.12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CachedNetworkImage(
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primary,
+                                ),
                               ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              imageUrl: AppConstants.imageBaseUrl +
+                                  (state.movieDetailsEntity?.backdropPath ??
+                                      ""),
+                              width: double.infinity,
+                              fit: BoxFit.fill,
+                              height: 220.h,
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            imageUrl: AppConstants.imageBaseUrl +
-                                (state.movieDetailsEntity?.backdropPath ?? ""),
-                            width: double.infinity,
-                            fit: BoxFit.fill,
-                            height: 220.h,
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 18.0.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    ((state.movieDetailsEntity?.title ?? "")
-                                                .length <=
-                                            27)
-                                        ? state.movieDetailsEntity?.title ?? ""
-                                        : "${(state.movieDetailsEntity?.title ?? "").substring(0, 27)}...",
-                                    style: AppStyles.movieDetailsTitleStyle,
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Text(
-                                    state.movieDetailsEntity?.releaseDate ?? "",
-                                    style: AppStyles.movieDescriptionStyle
-                                        .copyWith(fontSize: 15.sp),
-                                  ),
-                                  SizedBox(
-                                    height: 15.h,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      PosterItem(state.movieDetailsEntity),
-                                      SizedBox(
-                                        width: 12.w,
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Wrap(
-                                              spacing: 6.w,
-                                              runSpacing: 6.h,
-                                              children: state.movieDetailsEntity
-                                                      ?.genres
-                                                      ?.map((e) => Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      19.w,
-                                                                  vertical:
-                                                                      10.h),
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18.r),
-                                                              border: Border.all(
-                                                                  color: Colors
-                                                                      .grey)),
-                                                          child: Text(
-                                                            e.name ?? "",
-                                                            style: AppStyles
-                                                                .movieTitleInListStyle,
-                                                          )))
-                                                      .toList() ??
-                                                  [],
-                                            ),
-                                            SizedBox(
-                                              height: 12.h,
-                                            ),
-                                            SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  ExpandableText(
-                                                    // onLinkTap: () => print(on),
-                                                    onExpandedChanged: (value) {
-                                                      MovieDetailsBloc.get(
-                                                              context)
-                                                          .add(ShowMoreEvent(
-                                                              value));
-                                                    },
-                                                    animation: true,
-                                                    animationDuration:
-                                                        const Duration(
-                                                            milliseconds: 500),
-                                                    textAlign: TextAlign.start,
-                                                    style: AppStyles
-                                                        .movieTitleStyle,
-                                                    state.movieDetailsEntity
-                                                            ?.overview ??
-                                                        "",
-                                                    expandText:
-                                                        AppStrings.showMore,
-                                                    collapseText:
-                                                        AppStrings.showLess,
-                                                    maxLines: 3,
-                                                    linkColor:
-                                                        AppColors.primary,
-                                                  ),
-                                                ],
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 18.0.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      ((state.movieDetailsEntity?.title ?? "")
+                                                  .length <=
+                                              27)
+                                          ? state.movieDetailsEntity?.title ??
+                                              ""
+                                          : "${(state.movieDetailsEntity?.title ?? "").substring(0, 27)}...",
+                                      style: AppStyles.movieDetailsTitleStyle
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface,
+                                              fontSize: 25.sp,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Text(
+                                      state.movieDetailsEntity?.releaseDate ??
+                                          "",
+                                      style: AppStyles.movieDescriptionStyle
+                                          .copyWith(fontSize: 15.sp),
+                                    ),
+                                    SizedBox(
+                                      height: 15.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        PosterItem(state.movieDetailsEntity),
+                                        SizedBox(
+                                          width: 12.w,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Wrap(
+                                                spacing: 6.w,
+                                                runSpacing: 6.h,
+                                                children: state
+                                                        .movieDetailsEntity
+                                                        ?.genres
+                                                        ?.map((e) => Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        19.w,
+                                                                    vertical:
+                                                                        10.h),
+                                                            decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        18.r),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .grey)),
+                                                            child: Text(
+                                                              e.name ?? "",
+                                                              style: AppStyles.movieDetailsTitleStyle.copyWith(
+                                                                  fontSize:
+                                                                      15.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .normal,
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .colorScheme
+                                                                      .onSurface),
+                                                            )))
+                                                        .toList() ??
+                                                    [],
                                               ),
-                                            ),
+                                              SizedBox(
+                                                height: 12.h,
+                                              ),
+                                              SingleChildScrollView(
+                                                child: Column(
+                                                  children: [
+                                                    ExpandableText(
+                                                      // onLinkTap: () => print(on),
+                                                      onExpandedChanged:
+                                                          (value) {
+                                                        MovieDetailsBloc.get(
+                                                                context)
+                                                            .add(ShowMoreEvent(
+                                                                value));
+                                                      },
+                                                      animation: true,
+                                                      animationDuration:
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: AppStyles
+                                                          .movieTitleInListStyle
+                                                          .copyWith(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .onSurface),
+                                                      state.movieDetailsEntity
+                                                              ?.overview ??
+                                                          "",
+                                                      expandText:
+                                                          AppStrings.showMore,
+                                                      collapseText:
+                                                          AppStrings.showLess,
+                                                      maxLines: 3,
+                                                      linkColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             SizedBox(
                                               height: 10.h,
                                             ),
                                             Row(
                                               children: [
-                                                const Icon(
-                                                  Icons.star,
-                                                  color: AppColors.primary,
-                                                ),
-                                                SizedBox(
-                                                  width: 10.w,
-                                                ),
-                                                Text(
-                                                  (state.movieDetailsEntity
-                                                              ?.voteAverage ??
-                                                          0)
-                                                      .toString(),
-                                                  style: AppStyles
-                                                      .movieTitleInListStyle,
-                                                )
-                                              ],
-                                            )
+                                                  const Icon(
+                                                    Icons.star,
+                                                    color: AppColors.primary,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.w,
+                                                  ),
+                                                  Text(
+                                                    (state.movieDetailsEntity
+                                                                ?.voteAverage ??
+                                                            0)
+                                                        .toString(),
+                                                    style: AppStyles
+                                                        .movieTitleInListStyle
+                                                        .copyWith(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .colorScheme
+                                                                .onSurface),
+                                                  )
+                                                ],
+                                              )
                                           ],
                                         ),
                                       )

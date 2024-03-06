@@ -19,7 +19,9 @@ class MoreLikeThisPart extends StatelessWidget {
         children: [
           Text(
             AppStrings.moreLikeThis,
-            style: AppStyles.movieTitleStyle.copyWith(fontSize: 20.sp),
+            style: AppStyles.movieDetailsTitleStyle.copyWith(
+                fontSize: 20.sp,
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           SizedBox(height: 15.h,),
           SizedBox(

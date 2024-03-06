@@ -1,9 +1,7 @@
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_strings.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/domain/entities/RecommendedEntity.dart';
 import 'package:aflame/features/home/presentation/widgets/recommended_item.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,16 +15,18 @@ class RecommendedPart extends StatelessWidget {
     return Expanded(
       flex: 5,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical:10.h,horizontal: 20.w),
-        color: AppColors.barColor,
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+        color: Theme.of(context).colorScheme.onPrimary,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               AppStrings.recommended,
-              style: AppStyles.movieTitleStyle,
+              style: AppStyles.movieDetailsTitleStyle.copyWith(
+                  fontSize: 20.sp,
+                  color: Theme.of(context).colorScheme.onSurface),
             ),
-       // SizedBox(height: 15.h,),
+            // SizedBox(height: 15.h,),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,

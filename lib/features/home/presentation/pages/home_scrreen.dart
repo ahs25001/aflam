@@ -1,5 +1,5 @@
+import 'package:aflame/app_bloc.dart';
 import 'package:aflame/config.dart';
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_strings.dart';
 import 'package:aflame/features/home/domain/use_cases/add_movie_to_wish_use_case.dart';
 import 'package:aflame/features/home/domain/use_cases/delete_from_wish_list_use_case.dart';
@@ -16,7 +16,9 @@ import 'package:aflame/features/home/presentation/pages/wishs_tab.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/app_styles.dart';
 import '../bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -56,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text(AppStrings.cancel))
+                                child: const Text(AppStrings.cancel))
                           ],
                         ),
                       ));
@@ -78,12 +80,12 @@ class HomeScreen extends StatelessWidget {
               WishesTab()
             ];
             return Scaffold(
-              backgroundColor: AppColors.appBackGround,
+              // backgroundColor: AppColors.appBackGround,
               bottomNavigationBar: CurvedNavigationBar(
                 index: state.currentTab ?? 0,
-                backgroundColor: AppColors.primary,
-                buttonBackgroundColor: AppColors.barColor,
-                color: AppColors.barColor,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                buttonBackgroundColor: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.onPrimary,
                 onTap: (value) {
                   if (value == 3) {
                     HomeBloc.get(context)
@@ -96,25 +98,49 @@ class HomeScreen extends StatelessWidget {
                 items: [
                   const Icon(
                     Icons.home,
-                    color: Colors.white,
                   ),
-                  const Icon(Icons.search, color: Colors.white),
-                  const Icon(Icons.movie, color: Colors.white),
+                  const Icon(Icons.search),
+                  const Icon(Icons.movie),
                   Icon(Icons.favorite,
-                      color:
-                          (state.currentTab == 3) ? Colors.red : Colors.white)
+                      color: (state.currentTab == 3)
+                          ? Colors.red
+                          : Theme.of(context).colorScheme.onSurface)
                 ],
               ),
-              body: RefreshIndicator(
-                  onRefresh: () async {
-                    HomeBloc.get(context)
-                      ..add(GetPopularEvent())
-                      ..add(GetNewReleasesEvent())
-                      ..add(GetRecommendedEvent())
-                      ..add(GetCategoriesEvent())
-                      ..add(GetWishListEvent());
-                  },
-                  child: tabs[state.currentTab ?? 0]),
+              body: NestedScrollView(
+                body: RefreshIndicator(
+                    onRefresh: () async {
+                      HomeBloc.get(context)
+                        ..add(GetPopularEvent())
+                        ..add(GetNewReleasesEvent())
+                        ..add(GetRecommendedEvent())
+                        ..add(GetCategoriesEvent())
+                        ..add(GetWishListEvent());
+                    },
+                    child: tabs[state.currentTab ?? 0]),
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return [
+                    SliverAppBar(
+                      title: Text(AppStrings.appTitle,
+                          style: AppStyles.movieDetailsTitleStyle.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontSize: 25.sp,
+                              fontWeight: FontWeight.bold)),
+                      actions: [
+                        IconButton(
+                            onPressed: () {
+                              AppBloc.get(context).add(ChangeModeEvent());
+                            },
+                            icon:
+                                (AppBloc.get(context).state.mode == Mode.light)
+                                    ? const Icon(Icons.sunny)
+                                    : const Icon(Icons.nightlight))
+                      ],
+                    )
+                  ];
+                },
+              ),
             );
           },
         ),

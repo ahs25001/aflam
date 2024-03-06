@@ -6,8 +6,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utils/app_colors.dart';
-
 class SearchResultItem extends StatelessWidget {
   SearchResultDataEntity? searchResultDataEntity;
 
@@ -27,14 +25,14 @@ class SearchResultItem extends StatelessWidget {
               height: 95.h,
               imageUrl: AppConstants.imageBaseUrl +
                   (searchResultDataEntity?.backdropPath ?? ""),
-              placeholder: (context, url) => const Center(
+              placeholder: (context, url) => Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              errorWidget: (context, url, error) => const Icon(
+              errorWidget: (context, url, error) => Icon(
                 Icons.error,
-                color: AppColors.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -48,7 +46,9 @@ class SearchResultItem extends StatelessWidget {
                 width: 160.w,
                 child: Text(
                   searchResultDataEntity?.title ?? "",
-                  style: AppStyles.movieTitleInListStyle,
+                  style: AppStyles.movieDetailsTitleStyle
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface,fontSize: 15.sp,
+                    fontWeight: FontWeight.normal,),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

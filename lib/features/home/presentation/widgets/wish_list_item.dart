@@ -1,5 +1,4 @@
 import 'package:aflame/config/routs/routs.dart';
-import 'package:aflame/core/utils/app_colors.dart';
 import 'package:aflame/core/utils/app_constants.dart';
 import 'package:aflame/core/utils/app_styles.dart';
 import 'package:aflame/features/home/data/models/WishMovieModel.dart';
@@ -36,13 +35,13 @@ class WishListItem extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl:
                       AppConstants.imageBaseUrl + (wishMovieModel?.image ?? ""),
-                  placeholder: (context, url) => const Center(
+                  placeholder: (context, url) => Center(
                       child: CircularProgressIndicator(
-                    color: AppColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   )),
-                  errorWidget: (context, url, error) => const Icon(
+                  errorWidget: (context, url, error) => Icon(
                     Icons.error,
-                    color: AppColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -56,7 +55,8 @@ class WishListItem extends StatelessWidget {
                     width: 160.w,
                     child: Text(
                       wishMovieModel?.title ?? "",
-                      style: AppStyles.movieTitleInListStyle,
+                      style: AppStyles.movieTitleInListStyle.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -74,9 +74,9 @@ class WishListItem extends StatelessWidget {
               InkWell(
                   onTap: () => HomeBloc.get(context)
                       .add(DeleteFromWishListEvent(wishMovieModel!)),
-                  child: const Icon(
+                  child: Icon(
                     Icons.delete,
-                    color: AppColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ))
             ],
           ),

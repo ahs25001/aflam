@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/routs/routs.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_styles.dart';
 
@@ -27,14 +26,14 @@ class MovieDiscoverItem extends StatelessWidget {
               height: 95.h,
               imageUrl: AppConstants.imageBaseUrl +
                   (movieDiscoverDataEntity?.backdropPath ?? ""),
-              placeholder: (context, url) => const Center(
+              placeholder: (context, url) => Center(
                 child: CircularProgressIndicator(
-                  color: AppColors.primary,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
-              errorWidget: (context, url, error) => const Icon(
+              errorWidget: (context, url, error) => Icon(
                 Icons.error,
-                color: AppColors.primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
@@ -48,7 +47,10 @@ class MovieDiscoverItem extends StatelessWidget {
                 width: 160.w,
                 child: Text(
                   movieDiscoverDataEntity?.title ?? "",
-                  style: AppStyles.movieTitleInListStyle,
+                  style: AppStyles.movieDetailsTitleStyle.copyWith(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.onSurface),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

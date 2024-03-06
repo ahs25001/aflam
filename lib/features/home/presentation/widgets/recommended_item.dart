@@ -25,12 +25,12 @@ class RecommendedItem extends StatelessWidget {
       },
       builder: (context, state) {
         return Card(
-          color: AppColors.cardColor,
+          color: Theme.of(context).colorScheme.surface,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
-                alignment:Alignment.topLeft,
+                alignment: Alignment.topLeft,
                 children: [
                   InkWell(
                     onTap: () => Navigator.pushNamed(
@@ -44,9 +44,9 @@ class RecommendedItem extends StatelessWidget {
                         fit: BoxFit.fill,
                         width: 129.w,
                         height: 199.h,
-                        placeholder: (context, url) => const Center(
+                        placeholder: (context, url) => Center(
                           child: CircularProgressIndicator(
-                            color: AppColors.primary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         errorWidget: (context, url, error) =>
@@ -55,6 +55,7 @@ class RecommendedItem extends StatelessWidget {
                     ),
                   ),
                   AppComponents.addIcon(
+                      selectedColor: Theme.of(context).colorScheme.primary,
                       addMovie: () => HomeBloc.get(context).add(
                           AddToWishListEvent(WishMovieModel.fromRecommended(
                               recommendedDataEntity!))),
@@ -85,7 +86,8 @@ class RecommendedItem extends StatelessWidget {
                         ),
                         Text(
                           (recommendedDataEntity?.voteAverage ?? 0).toString(),
-                          style: AppStyles.movieTitleInListStyle,
+                          style: AppStyles.movieTitleInListStyle.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface),
                         )
                       ],
                     ),
@@ -93,11 +95,13 @@ class RecommendedItem extends StatelessWidget {
                       ((recommendedDataEntity?.title?.length ?? 0) < 12)
                           ? recommendedDataEntity?.title ?? ""
                           : "${(recommendedDataEntity?.title ?? "").substring(0, 12)}...",
-                      style: AppStyles.movieTitleInListStyle,
+                      style: AppStyles.movieTitleInListStyle.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
                     ),
                     Text(
                       recommendedDataEntity?.releaseDate ?? "",
-                      style: AppStyles.dateStyle,
+                      style: AppStyles.dateStyle.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
                     )
                   ],
                 ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_componants.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../home/data/models/WishMovieModel.dart';
@@ -33,16 +32,17 @@ class PosterItem extends StatelessWidget {
                 fit: BoxFit.fill,
                 width: 129.w,
                 height: 199.h,
-                placeholder: (context, url) =>
-                const Center(
+                placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                errorWidget: (context, url, error) => Icon(Icons.error,
+                    color: Theme.of(context).colorScheme.primary),
               ),
             ),
             AppComponents.addIcon(
+              selectedColor: Theme.of(context).colorScheme.primary,
                 addMovie: () {
                   MovieDetailsBloc.get(context).add(
                       AddToWishListFromDetailsEvent(

@@ -24,15 +24,13 @@ class MovieDiscoverScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.appBackGround,
             appBar: AppBar(
-              backgroundColor: AppColors.barColor,
-              centerTitle: true,
-              iconTheme: const IconThemeData(color: Colors.white),
               title: Text(
                 args.name ?? "",
-                style: AppStyles.movieDetailsTitleStyle,
-              ),
+                  style: AppStyles.movieDetailsTitleStyle.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 25.sp,
+                      fontWeight: FontWeight.bold)),
             ),
             body: (state.movieDiscoverScreenStatus ==
                     MovieDiscoverScreenStatus.getMovieDiscoverLoading)
@@ -47,10 +45,10 @@ class MovieDiscoverScreen extends StatelessWidget {
                       itemBuilder: (context, index) => MovieDiscoverItem(
                           state.movieDiscoverEntity?.results?[index]),
                       separatorBuilder: (context, index) => Divider(
-                            color: Colors.white38,
-                            endIndent: 10.w,
-                            indent: 10.w,
-                          ),
+                        color: Theme.of(context).colorScheme.background,
+                              endIndent: 10.w,
+                              indent: 10.w,
+                            ),
                       itemCount: state.movieDiscoverEntity?.results?.length ?? 0),
                 ),
           );
