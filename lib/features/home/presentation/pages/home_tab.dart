@@ -13,32 +13,50 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return (state.homeScreenStatus ==
-                      HomeScreenStatus.getRecommendedLoading ||
-                  state.homeScreenStatus ==
-                      HomeScreenStatus.getPopularLoading ||
-                  state.homeScreenStatus ==
-                      HomeScreenStatus.getNewReleasesLoading)
-              ? const Center(
-                  child: CircularProgressIndicator(
-                  color: Colors.amber,
-                ))
-              : SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height),
-                    child: Column(children: [
-                      PopularPart(state.popularEntity?.results ?? []),
-                      SizedBox(
-                        height: 13.h,
-                      ),
-                      NewReleasesPart(state.newReleasesEntity),
-                      RecommendedPart(state.recommendedEntity),
-                    ]),
-                  ),
-                );
-        });
+      listener: (BuildContext context, HomeState state) {
+        if (state.homeScreenStatus == HomeScreenStatus.getRecommendedLoading ||
+            state.homeScreenStatus == HomeScreenStatus.getPopularLoading ||
+            state.homeScreenStatus == HomeScreenStatus.getNewReleasesLoading) {
+          showDialog(
+             barrierColor: Colors.transparent,
+            barrierDismissible: false,
+            context: context,
+            builder: (context) =>  PopScope(
+              canPop: false,
+              child: AlertDialog(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
+                content: Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.primary,
+                    )),
+              ),
+            ),
+          );
+        }
+        else if (state.homeScreenStatus == HomeScreenStatus.getRecommendedSuccess ||
+            state.homeScreenStatus == HomeScreenStatus.getPopularSuccess ||
+            state.homeScreenStatus == HomeScreenStatus.getNewReleasesSuccess){
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 1.01),
+            child: Column(children: [
+              PopularPart(state.popularEntity?.results ?? []),
+              SizedBox(
+                height: 13.h,
+              ),
+              NewReleasesPart(state.newReleasesEntity),
+              RecommendedPart(state.recommendedEntity),
+            ]),
+          ),
+        );
+      },
+    );
   }
 }

@@ -25,10 +25,9 @@ class WishesTab extends StatelessWidget {
               ),
               Text(
                 AppStrings.watchlist,
-                style:AppStyles.movieDetailsTitleStyle.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold),
+                style: AppStyles.categoryTitleStyle.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
               SizedBox(
                 height: 15.h,

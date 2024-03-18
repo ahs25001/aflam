@@ -7,6 +7,8 @@ class AppStyles {
       fontSize: 17.sp,fontWeight: FontWeight.w400);
   static TextStyle movieDetailsTitleStyle = GoogleFonts.poppins(
       fontSize: 25.sp, fontWeight: FontWeight.bold);
+  static TextStyle categoryTitleStyle = GoogleFonts.poppins(
+      fontSize: 20.sp, fontWeight: FontWeight.bold);
   static TextStyle movieDescriptionStyle =
       GoogleFonts.poppins(fontSize: 12.sp, color: Colors.grey);
   static TextStyle movieTitleInListStyle =

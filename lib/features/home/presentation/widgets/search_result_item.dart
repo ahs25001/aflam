@@ -46,9 +46,8 @@ class SearchResultItem extends StatelessWidget {
                 width: 160.w,
                 child: Text(
                   searchResultDataEntity?.title ?? "",
-                  style: AppStyles.movieDetailsTitleStyle
-                      .copyWith(color: Theme.of(context).colorScheme.onSurface,fontSize: 15.sp,
-                    fontWeight: FontWeight.normal,),
+                  style: AppStyles.movieTitleInListStyle
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

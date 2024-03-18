@@ -47,10 +47,8 @@ class MovieDiscoverItem extends StatelessWidget {
                 width: 160.w,
                 child: Text(
                   movieDiscoverDataEntity?.title ?? "",
-                  style: AppStyles.movieDetailsTitleStyle.copyWith(
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).colorScheme.onSurface),
+                  style: AppStyles.movieTitleInListStyle
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

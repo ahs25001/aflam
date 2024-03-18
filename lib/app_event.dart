@@ -4,3 +4,9 @@ part of 'app_bloc.dart';
 abstract class AppEvent {}
 
 class ChangeModeEvent extends AppEvent {}
+
+class SaveModeEvent extends AppEvent {
+  String mode ;
+
+  SaveModeEvent(this.mode);
+}

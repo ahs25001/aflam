@@ -73,12 +73,9 @@ class CarouselSliderItem extends StatelessWidget {
                 Text(
                   ((resultsEntity.title ?? "null").length < 14)
                       ? resultsEntity.title ?? "null"
-                      : "${(resultsEntity.title ?? "null").substring(
-                      0, 14)}....",
-                  style: AppStyles.movieDetailsTitleStyle.copyWith(
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).colorScheme.onSurface),
+                      : "${(resultsEntity.title ?? "null").substring(0, 14)}....",
+                  style: AppStyles.movieTitleStyle
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 8.h,),

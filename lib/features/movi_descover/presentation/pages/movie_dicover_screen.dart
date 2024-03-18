@@ -25,12 +25,10 @@ class MovieDiscoverScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                args.name ?? "",
+              title: Text(args.name ?? "",
                   style: AppStyles.movieDetailsTitleStyle.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold)),
+                    color: Theme.of(context).colorScheme.onSurface,
+                  )),
             ),
             body: (state.movieDiscoverScreenStatus ==
                     MovieDiscoverScreenStatus.getMovieDiscoverLoading)

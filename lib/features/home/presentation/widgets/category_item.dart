@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
         child: Center(
             child: Text(
           genresCategoryEntity?.name ?? "",
-          style: AppStyles.movieTitleInListStyle.copyWith(
+          style: AppStyles.movieTitleStyle.copyWith(
             color: Colors.white,
               fontWeight: FontWeight.w400),
         )),

@@ -1,6 +1,6 @@
 part of 'app_bloc.dart';
 
-enum Mode { light, dark }
+enum Mode {init, light, dark }
 
 @immutable
 class AppState {
@@ -14,5 +14,5 @@ class AppState {
 }
 
 class AppInitial extends AppState {
-  AppInitial():super(mode: Mode.light);
+  AppInitial():super(mode: Mode.init);
 }

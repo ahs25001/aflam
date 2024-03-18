@@ -125,8 +125,7 @@ class HomeScreen extends StatelessWidget {
                       title: Text(AppStrings.appTitle,
                           style: AppStyles.movieDetailsTitleStyle.copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.bold)),
+                          )),
                       actions: [
                         IconButton(
                             onPressed: () {
