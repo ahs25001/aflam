@@ -1,4 +1,4 @@
-import 'package:aflame/app_bloc.dart';
+import 'package:aflame/app/app_bloc.dart';
 import 'package:aflame/config.dart';
 import 'package:aflame/core/utils/app_strings.dart';
 import 'package:aflame/features/home/domain/use_cases/add_movie_to_wish_use_case.dart';
@@ -118,14 +118,18 @@ class HomeScreen extends StatelessWidget {
                         ..add(GetWishListEvent());
                     },
                     child: tabs[state.currentTab ?? 0]),
+
                 headerSliverBuilder:
                     (BuildContext context, bool innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
+                      // bottom: PreferredSize(child: Container(color: re, ,),),
+                     // floating: true,
                       title: Text(AppStrings.appTitle,
                           style: AppStyles.movieDetailsTitleStyle.copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
-                          )),
+
+                          ),textAlign: TextAlign.center,),
                       actions: [
                         IconButton(
                             onPressed: () {

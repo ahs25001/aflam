@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../features/home/presentation/pages/home_scrreen.dart';
 
 class AppRoutes {
-  static const String home = "/";
+  static const String home = "home";
   static const String movieDetails = "movieDetails";
   static const String movieDiscover = "movieDiscover";
 }

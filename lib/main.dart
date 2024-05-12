@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'app_bloc.dart';
+import 'app/app_bloc.dart';
 import "config.dart";
 import 'core/shared_preferences/shared_preferences.dart';
 import 'my_opserver.dart';
@@ -24,7 +24,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   String theme;
-
   MyApp(this.theme);
 
   @override
